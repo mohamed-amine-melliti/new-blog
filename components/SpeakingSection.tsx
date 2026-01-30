@@ -26,7 +26,7 @@ export const SpeakingSection: React.FC = () => {
     {
       year: '2022',
       event: 'NG-CONF',
-      location: 'Salt Lake City, US',
+      location: 'Tunis , Tunisia',
       title: 'Managing Complex State in Enterprise Angular Apps',
       type: 'Case Study'
     }
