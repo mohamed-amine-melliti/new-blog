@@ -12,14 +12,14 @@ export const SpeakingSection: React.FC = () => {
     {
       year: '2023',
       event: 'Vue.js Live',
-      location: 'London, UK',
+      location: 'Tunis , Tunisia',
       title: 'Reactive Intelligence: Building AI Agents with Vue 3',
       type: 'Workshop'
     },
     {
       year: '2023',
       event: 'PyCon MEA',
-      location: 'Cairo, EG',
+      location: 'Tunis , Tunisia',
       title: 'From Script to Production: Scalable Deep Learning Inference',
       type: 'Talk'
     },
