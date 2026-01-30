@@ -38,7 +38,7 @@ export const AboutPage: React.FC = () => {
                 <div className="space-y-12">
                     <div>
                         <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Location</h3>
-                        <p className="text-2xl font-black uppercase tracking-tight">Cairo, Egypt</p>
+                        <p className="text-2xl font-black uppercase tracking-tight">Tunis , Tunisia</p>
                     </div>
                     <div>
                         <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Experience</h3>

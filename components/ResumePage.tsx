@@ -33,7 +33,7 @@ export const ResumePage: React.FC = () => {
             <div className="text-right flex flex-col gap-1 text-sm font-medium">
                <a href="mailto:contact@mam.dev" className="hover:text-fas-red transition-colors">contact@mam.dev</a>
                <a href="https://github.com/mam" className="hover:text-fas-red transition-colors">github.com/mam</a>
-               <p>Cairo, Egypt</p>
+               <p>Tunis , Tunisia</p>
             </div>
           </div>
 
