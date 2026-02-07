@@ -7,7 +7,7 @@ import { Footer } from './Footer';
 
 export const ArticlePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { articles } = useArticles();
+  const { articles, loading } = useArticles();
   const article = articles.find(a => a.id === id);
 
   // Audio State
@@ -28,6 +28,15 @@ export const ArticlePage: React.FC = () => {
       }
     };
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white font-sans text-black flex items-center justify-center">
+        <Header />
+        <div className="text-xl font-black uppercase tracking-widest mt-24">Loading Article...</div>
+      </div>
+    );
+  }
 
   const handleListen = async () => {
     if (isPlaying) {

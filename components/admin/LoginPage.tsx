@@ -3,17 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(password)) {
-      navigate('/dashboard');
+    setLoading(true);
+    setError('');
+    
+    const { error } = await login(email, password);
+    
+    if (error) {
+      setError(error.message);
+      setLoading(false);
     } else {
-      setError('Invalid password. Try "admin".');
+      navigate('/dashboard');
     }
   };
 
@@ -27,6 +35,18 @@ export const LoginPage: React.FC = () => {
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
+            <label className="block text-xs font-bold uppercase tracking-widest mb-2">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-gray-50 border-2 border-black p-3 font-mono focus:outline-none focus:border-fas-red transition-colors"
+              placeholder="admin@example.com"
+              required
+            />
+          </div>
+
+          <div>
             <label className="block text-xs font-bold uppercase tracking-widest mb-2">Password</label>
             <input
               type="password"
@@ -34,6 +54,7 @@ export const LoginPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-gray-50 border-2 border-black p-3 font-mono focus:outline-none focus:border-fas-red transition-colors"
               placeholder="••••••••"
+              required
             />
           </div>
           
@@ -45,9 +66,10 @@ export const LoginPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-black text-white font-black uppercase py-4 tracking-widest hover:bg-fas-red transition-colors"
+            disabled={loading}
+            className="w-full bg-black text-white font-black uppercase py-4 tracking-widest hover:bg-fas-red transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Enter Dashboard
+            {loading ? 'Authenticating...' : 'Enter Dashboard'}
           </button>
         </form>
         

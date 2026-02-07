@@ -98,6 +98,14 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               } 
             />
+            <Route 
+              path="/dashboard/edit/:id" 
+              element={
+                <ProtectedRoute>
+                  <ArticleEditor />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </Router>
       </ArticleProvider>

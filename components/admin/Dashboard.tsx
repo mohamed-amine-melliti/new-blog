@@ -4,7 +4,7 @@ import { useArticles } from '../../contexts/ArticleContext';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const Dashboard: React.FC = () => {
-  const { articles, deleteArticle } = useArticles();
+  const { articles, deleteArticle, loading } = useArticles();
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -12,6 +12,14 @@ export const Dashboard: React.FC = () => {
     logout();
     navigate('/');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-xl font-black uppercase tracking-widest">Loading Dashboard...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -91,13 +99,21 @@ export const Dashboard: React.FC = () => {
                        {article.date}
                      </td>
                      <td className="p-6 text-right">
-                       <button 
-                         onClick={() => deleteArticle(article.id)}
-                         className="text-red-500 hover:text-black font-bold uppercase text-xs tracking-widest transition-colors"
-                       >
-                         Delete
-                       </button>
-                     </td>
+                      <div className="flex items-center justify-end gap-4">
+                        <Link 
+                          to={`/dashboard/edit/${article.id}`}
+                          className="text-gray-500 hover:text-black font-bold uppercase text-xs tracking-widest transition-colors"
+                        >
+                          Edit
+                        </Link>
+                        <button 
+                          onClick={() => deleteArticle(article.id)}
+                          className="text-red-500 hover:text-black font-bold uppercase text-xs tracking-widest transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
                    </tr>
                  ))}
                </tbody>

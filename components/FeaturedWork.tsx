@@ -3,13 +3,32 @@ import { useArticles } from '../contexts/ArticleContext';
 import { ArticleCard } from './ArticleCard';
 
 export const FeaturedWork: React.FC = () => {
-  const { articles } = useArticles();
+  const { articles, loading } = useArticles();
   
   // Split articles to feature the first one prominently
   const featuredArticle = articles[0];
   const standardArticles = articles.slice(1);
 
-  if (!featuredArticle) return null;
+  if (loading) {
+    return (
+      <section className="bg-white py-24 border-b-2 border-black">
+        <div className="max-w-screen-2xl mx-auto px-4 text-center">
+          <div className="inline-block animate-spin w-8 h-8 border-4 border-black border-t-transparent rounded-full mb-4"></div>
+          <p className="font-bold uppercase tracking-widest text-sm">Loading Articles...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (!featuredArticle) {
+    return (
+      <section className="bg-white py-24 border-b-2 border-black">
+        <div className="max-w-screen-2xl mx-auto px-4 text-center">
+           <p className="font-bold uppercase tracking-widest text-sm text-gray-400">No articles found.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="articles" className="bg-white">
